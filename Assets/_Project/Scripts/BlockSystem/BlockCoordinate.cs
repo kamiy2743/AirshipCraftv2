@@ -16,9 +16,9 @@ namespace BlockSystem
         public BlockCoordinate(Vector3 position) : this((int)position.x, (int)position.y, (int)position.z) { }
         public BlockCoordinate(int x, int y, int z)
         {
-            if (x < 0 || x >= WorldModel.BlockSideXZ) throw new System.Exception("x座標が不正です: " + x);
-            if (y < 0 || y >= WorldModel.BlockSideY) throw new System.Exception("y座標が不正です: " + y);
-            if (z < 0 || z >= WorldModel.BlockSideXZ) throw new System.Exception("z座標が不正です: " + z);
+            if (x < 0 || x >= WorldData.BlockSideXZ) throw new System.Exception("x座標が不正です: " + x);
+            if (y < 0 || y >= WorldData.BlockSideY) throw new System.Exception("y座標が不正です: " + y);
+            if (z < 0 || z >= WorldData.BlockSideXZ) throw new System.Exception("z座標が不正です: " + z);
 
             this.x = x;
             this.y = y;
@@ -26,9 +26,9 @@ namespace BlockSystem
         }
 
         public BlockCoordinate(ChunkCoordinate cc, LocalCoordinate lc) : this(
-            cc.x * ChunkModel.BlockSide + lc.x,
-            cc.y * ChunkModel.BlockSide + lc.y,
-            cc.z * ChunkModel.BlockSide + lc.z
+            cc.x * ChunkData.BlockSide + lc.x,
+            cc.y * ChunkData.BlockSide + lc.y,
+            cc.z * ChunkData.BlockSide + lc.z
         )
         { }
 
@@ -40,18 +40,18 @@ namespace BlockSystem
         public ChunkCoordinate ToChunkCoordinate()
         {
             return new ChunkCoordinate(
-                x / ChunkModel.BlockSide,
-                y / ChunkModel.BlockSide,
-                z / ChunkModel.BlockSide
+                x / ChunkData.BlockSide,
+                y / ChunkData.BlockSide,
+                z / ChunkData.BlockSide
             );
         }
 
         public LocalCoordinate ToLocalCoordinate()
         {
             return new LocalCoordinate(
-                x % ChunkModel.BlockSide,
-                y % ChunkModel.BlockSide,
-                z % ChunkModel.BlockSide
+                x % ChunkData.BlockSide,
+                y % ChunkData.BlockSide,
+                z % ChunkData.BlockSide
             );
         }
     }

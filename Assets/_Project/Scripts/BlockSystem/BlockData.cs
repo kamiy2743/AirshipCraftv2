@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace BlockSystem
 {
-    public class BlockModel
+    public class BlockData
     {
         public readonly BlockCoordinate blockCoordinate;
 
-        public BlockModel(BlockCoordinate bc)
+        public BlockData(BlockCoordinate bc)
         {
             blockCoordinate = bc;
         }

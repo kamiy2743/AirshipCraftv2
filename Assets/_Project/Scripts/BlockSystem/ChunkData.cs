@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace BlockSystem
 {
-    public class ChunkModel
+    public class ChunkData
     {
         public const int BlockSide = 4;
 
         public readonly ChunkCoordinate chunkCoordinate;
 
-        private BlockModel[] blockModels = new BlockModel[BlockSide * BlockSide * BlockSide];
+        private BlockData[] blockDataArray = new BlockData[BlockSide * BlockSide * BlockSide];
 
-        public ChunkModel(ChunkCoordinate cc)
+        public ChunkData(ChunkCoordinate cc)
         {
             chunkCoordinate = cc;
 
@@ -24,7 +24,7 @@ namespace BlockSystem
                     {
                         var lc = new LocalCoordinate(x, y, z);
                         var bc = new BlockCoordinate(cc, lc);
-                        SetBlockModel(lc, new BlockModel(bc));
+                        SetBlockData(lc, new BlockData(bc));
                     }
                 }
             }
@@ -35,14 +35,14 @@ namespace BlockSystem
             return (lc.y * BlockSide * BlockSide) + (lc.z * BlockSide) + lc.x;
         }
 
-        private void SetBlockModel(LocalCoordinate lc, BlockModel blockModel)
+        private void SetBlockData(LocalCoordinate lc, BlockData blockData)
         {
-            blockModels[ToIndex(lc)] = blockModel;
+            blockDataArray[ToIndex(lc)] = blockData;
         }
 
-        public BlockModel GetBlockModel(LocalCoordinate lc)
+        public BlockData GetBlockData(LocalCoordinate lc)
         {
-            return blockModels[ToIndex(lc)];
+            return blockDataArray[ToIndex(lc)];
         }
     }
 }

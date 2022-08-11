@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace BlockSystem
 {
-    public class WorldModel
+    public class WorldData
     {
         public const int ChunkSideXZ = 5;
         public const int ChunkSideY = 1;
 
-        public const int BlockSideXZ = ChunkSideXZ * ChunkModel.BlockSide;
-        public const int BlockSideY = ChunkSideY * ChunkModel.BlockSide;
+        public const int BlockSideXZ = ChunkSideXZ * ChunkData.BlockSide;
+        public const int BlockSideY = ChunkSideY * ChunkData.BlockSide;
 
-        private ChunkModel[] chunkModels = new ChunkModel[ChunkSideXZ * ChunkSideXZ * ChunkSideY];
+        private ChunkData[] chunkDataArray = new ChunkData[ChunkSideXZ * ChunkSideXZ * ChunkSideY];
 
-        public WorldModel()
+        public WorldData()
         {
             for (int x = 0; x < ChunkSideXZ; x++)
             {
@@ -23,7 +23,7 @@ namespace BlockSystem
                     for (int z = 0; z < ChunkSideXZ; z++)
                     {
                         var cc = new ChunkCoordinate(x, y, z);
-                        SetChunkModel(cc, new ChunkModel(cc));
+                        SetChunkData(cc, new ChunkData(cc));
                     }
                 }
             }
@@ -34,22 +34,22 @@ namespace BlockSystem
             return (cc.y * ChunkSideXZ * ChunkSideXZ) + (cc.z * ChunkSideXZ) + cc.x;
         }
 
-        private void SetChunkModel(ChunkCoordinate cc, ChunkModel chunkModel)
+        private void SetChunkData(ChunkCoordinate cc, ChunkData chunkData)
         {
-            chunkModels[ToIndex(cc)] = chunkModel;
+            chunkDataArray[ToIndex(cc)] = chunkData;
         }
 
-        public ChunkModel GetChunkModel(ChunkCoordinate cc)
+        public ChunkData GetChunkData(ChunkCoordinate cc)
         {
-            return chunkModels[ToIndex(cc)];
+            return chunkDataArray[ToIndex(cc)];
         }
 
-        public BlockModel GetBlockModel(BlockCoordinate bc)
+        public BlockData GetBlockData(BlockCoordinate bc)
         {
             var cc = bc.ToChunkCoordinate();
             var lc = bc.ToLocalCoordinate();
-            var chunkModel = GetChunkModel(cc);
-            return chunkModel.GetBlockModel(lc);
+            var chunkData = GetChunkData(cc);
+            return chunkData.GetBlockData(lc);
         }
     }
 }
