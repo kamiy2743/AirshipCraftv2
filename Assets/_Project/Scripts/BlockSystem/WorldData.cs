@@ -12,7 +12,8 @@ namespace BlockSystem
         public const int BlockSideXZ = ChunkSideXZ * ChunkData.BlockSide;
         public const int BlockSideY = ChunkSideY * ChunkData.BlockSide;
 
-        private ChunkData[] chunkDataArray = new ChunkData[ChunkSideXZ * ChunkSideXZ * ChunkSideY];
+        public IReadOnlyCollection<ChunkData> ChunkDataArray => chunkDataArray;
+        private readonly ChunkData[] chunkDataArray = new ChunkData[ChunkSideXZ * ChunkSideXZ * ChunkSideY];
 
         public WorldData()
         {

@@ -10,7 +10,8 @@ namespace BlockSystem
 
         public readonly ChunkCoordinate chunkCoordinate;
 
-        private BlockData[] blockDataArray = new BlockData[BlockSide * BlockSide * BlockSide];
+        public IReadOnlyCollection<BlockData> BlockDataArray => blockDataArray;
+        private readonly BlockData[] blockDataArray = new BlockData[BlockSide * BlockSide * BlockSide];
 
         public ChunkData(ChunkCoordinate cc)
         {
